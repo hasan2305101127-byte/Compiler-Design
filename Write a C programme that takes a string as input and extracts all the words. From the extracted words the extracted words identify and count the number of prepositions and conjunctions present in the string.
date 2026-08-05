@@ -1,1 +1,58 @@
-
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+int main() {
+char *prepositions[] = {
+"in","on","at","by","with","about","against","between","into",
+"through","during","before","after","above","below","to","from",
+"up","down","over","under","of","for"};
+int totalPrep = sizeof(prepositions)/sizeof(prepositions[0]);
+char *conjunctions[] = {
+"and","but","or","yet","so","for","nor","because","although",
+"while","unless","until","since","whereas"};
+int totalConj = sizeof(conjunctions)/sizeof(conjunctions[0]);
+int prepCount[200] = {0};
+int conjCount[200] = {0};
+char text[1000];
+char word[50];
+printf("Enter text:\n");
+fgets(text, sizeof(text), stdin);
+int index = 0;
+for (int i = 0; text[i]; i++) {
+if (isalpha(text[i])) {
+word[index++] = tolower(text[i]); }
+else {
+if (index > 0) {
+word[index] = '\0';
+index = 0;
+for (int p = 0; p < totalPrep; p++) if
+(strcmp(word, prepositions[p]) == 0)
+prepCount[p]++;
+for (int c = 0; c < totalConj; c++) if (strcmp(word,
+conjunctions[c]) == 0) conjCount[c]++;
+}
+}
+}
+printf("\nPrepositions: ");
+int printed = 0;
+for (int p = 0; p < totalPrep; p++) {
+if (prepCount[p] > 0) {
+if (printed) printf(", ");
+printf("%s(%d)", prepositions[p], prepCount[p]);
+printed = 1;
+}
+}
+if (!printed) printf("None");
+printf("\nConjunctions: ");
+printed = 0;
+for (int c = 0; c < totalConj; c++) {
+if (conjCount[c] > 0) {
+if (printed) printf(", ");
+printf("%s(%d)", conjunctions[c], conjCount[c]);
+printed = 1;
+}
+}
+if (!printed) printf("None");
+printf("\n");
+return 0;
+}
