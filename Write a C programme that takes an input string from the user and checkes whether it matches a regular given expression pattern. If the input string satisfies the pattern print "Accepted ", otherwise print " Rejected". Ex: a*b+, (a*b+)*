@@ -1,1 +1,54 @@
+//Week:5.2 regular expression: a*b+
+#include <stdio.h>
+#include <string.h>
+int main() {
+char text[100];
+printf("Enter a string: ");
+scanf("%s", text);
+int i = 0;
+while (text[i] == 'a') {
+i++;
+}
+int bCount = 0;
+while (text[i] == 'b') {
+i++;
+bCount++;
+}
+if (text[i] == '\0' && bCount > 0) {
+printf("Accepted\n");
+} else {
+printf("Rejected\n");
+}
+return 0;
+}
+
+
+
+
+Week:5.2
+Problem:2
+//Week:5.2 regular expression: (a*b+)*
+//Section: A1
+#include <stdio.h>
+int main() {
+char str[100];
+int i = 0;
+printf("Enter a string: ");
+scanf("%s", str);
+while (str[i] != '\0') {
+while (str[i] == 'a') {
+i++;
+}
+int bCount = 0;while (str[i] == 'b') {
+i++;
+bCount++;
+}
+if (bCount == 0) {
+printf("Rejected\n");
+return 0;
+}
+}
+printf("Accepted\n");
+return 0;
+}
 
